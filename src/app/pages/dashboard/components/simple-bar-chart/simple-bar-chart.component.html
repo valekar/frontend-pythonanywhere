@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="data" class="col-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>Sentence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{data.score}}</td>
+            <td>{{data.sentence}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="watsonData">
+      <table class="table table-bordered">
+        <thead>
+          <th>Service Provider Name</th>
+          <th>Positive Score</th>
+          <th>Neutral Score</th>
+          <th>Negative Score</th>
+          <th>Response Time</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Human</td>
+            <td>{{humanPositiveScore}}</td>
+            <td>0</td>
+            <td>{{humanNegativeScore}}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Open Source (NLTK)</td>
+            <td>{{openSourceScore.data.pos}}</td>
+            <td>{{openSourceScore.data.neu}}</td>
+            <td>{{openSourceScore.data.neg}}</td>
+            <td>{{openSourceScore.responseTime}}</td>
+          </tr>
+          <tr>
+            <td>Mircosoft Azure</td>
+            <td>{{azurePositiveScore}}</td>
+            <td>0</td>
+            <td>{{azureNegativeScore}}</td>
+            <td>{{azureData.responseTime}}</td>
+          </tr>
+          <tr>
+            <td>IBM Watson</td>
+            <td>{{watsonPositiveScore}}</td>
+            <td>{{watsonNeutralScore}}</td>
+            <td>{{watsonNegativeScore}}</td>
+            <td>{{watsonData.responseTime}}</td>
+          </tr>
+          <tr>
+            <td>Google</td>
+            <td>{{googlePositiveScore}}</td>
+            <td>{{googleNeutralScore}}</td>
+            <td>{{googleNegativeScore}}</td>
+            <td>{{googleData.responseTime}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <h4 class="text-center">Comparision of correctiveness</h4>
+      <div class="row">
+        <div class="col-4">
+          <h5>Google</h5>
+          <div compare-bar [data]="googleCorrectiveData" [id]="'#barId_1'">
+            <div id="barId_1"></div>
+          </div>
+        </div>
+        <div class="col-4">
+          <h5>Azure</h5>
+          <div compare-bar [data]="azureCorrectiveData" [id]="'#barId_2'">
+            <div id="barId_2"></div>
+          </div>
+        </div>
+        <div class="col-4">
+          <h5>IBM Watson</h5>
+          <div compare-bar [data]="watsonCorrectiveData" [id]="'#barId_3'">
+            <div id="barId_3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      <h4 class="text-center">Response Time(Python application Deployed in PythonAnyWhere)</h4>
+      <div *ngIf="toggleResponseTimeChart">
+        <div bar-chart [responseTime]="responseTime">
+          <div id="barId"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
